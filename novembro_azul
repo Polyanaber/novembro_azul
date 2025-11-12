@@ -78,6 +78,7 @@
             background: var(--accent-blue);
             padding: 12px 0;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: relative;
         }
 
         nav ul {
@@ -107,6 +108,39 @@
 
         nav a i {
             font-size: 14px;
+        }
+
+        .search-container {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+        }
+
+        .search-container input {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 20px;
+            width: 200px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .search-container input:focus {
+            outline: none;
+            width: 250px;
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
+        }
+
+        .search-container button {
+            background: transparent;
+            border: none;
+            color: white;
+            margin-left: 10px;
+            cursor: pointer;
+            font-size: 16px;
         }
 
         main {
@@ -583,6 +617,522 @@
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
 
+        /* Estilos para a página de consulta */
+        .consulta-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid var(--gray-border);
+        }
+
+        .consulta-header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .consulta-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #60a5fa, #93c5fd, #60a5fa);
+        }
+
+        .consulta-filtros {
+            background: var(--gray-light);
+            padding: 20px;
+            border-bottom: 1px solid var(--gray-border);
+        }
+
+        .consulta-resultados {
+            padding: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .tabela-consulta {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .tabela-consulta th {
+            background: var(--primary-blue);
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .tabela-consulta td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--gray-border);
+        }
+
+        .tabela-consulta tr:nth-child(even) {
+            background: var(--gray-light);
+        }
+
+        .tabela-consulta tr:hover {
+            background: var(--light-blue);
+        }
+
+        .acoes-tabela {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-acao {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .btn-acao.editar {
+            background: var(--warning);
+            color: white;
+        }
+
+        .btn-acao.excluir {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-acao.imprimir {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-acao:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* Estilos para impressão */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .impressao-container, .impressao-container * {
+                visibility: visible;
+            }
+            .impressao-container {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                padding: 20px;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+
+        .impressao-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+
+        .impressao-header {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--primary-blue);
+            padding-bottom: 15px;
+        }
+
+        .impressao-header h2 {
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .impressao-dados {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .impressao-grupo {
+            margin-bottom: 15px;
+        }
+
+        .impressao-grupo h3 {
+            color: var(--primary-blue);
+            margin-bottom: 8px;
+            font-size: 16px;
+            border-bottom: 1px solid var(--gray-border);
+            padding-bottom: 5px;
+        }
+
+        .impressao-item {
+            display: flex;
+            margin-bottom: 5px;
+        }
+
+        .impressao-label {
+            font-weight: 600;
+            min-width: 150px;
+        }
+
+        .impressao-valor {
+            flex: 1;
+        }
+
+        /* Estilos para o Chatbot */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .chatbot-button {
+            background: var(--secondary-blue);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .chatbot-button:hover {
+            transform: scale(1.1);
+            background: var(--accent-blue);
+        }
+
+        .chatbot-window {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            width: 350px;
+            height: 450px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chatbot-header {
+            background: var(--primary-blue);
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chatbot-header h3 {
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .message {
+            padding: 10px 15px;
+            border-radius: 18px;
+            max-width: 80%;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .message.bot {
+            background: var(--light-blue);
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        .message.user {
+            background: var(--secondary-blue);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .chatbot-input {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid var(--gray-border);
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid var(--gray-border);
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .chatbot-input button {
+            background: var(--secondary-blue);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-left: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quick-questions {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .quick-question {
+            background: white;
+            border: 1px solid var(--gray-border);
+            padding: 8px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quick-question:hover {
+            background: var(--light-blue);
+            border-color: var(--secondary-blue);
+        }
+
+        /* Estilos para página de saúde expandida */
+        .saude-expandida {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        .saude-expandida h2 {
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .saude-categorias {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .saude-categoria {
+            background: var(--gray-light);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary-blue);
+        }
+
+        .saude-categoria h3 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .saude-categoria ul {
+            padding-left: 20px;
+        }
+
+        .saude-categoria li {
+            margin-bottom: 8px;
+            color: #475569;
+        }
+
+        .recursos-adicionais {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .recurso {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .recurso:hover {
+            transform: translateY(-5px);
+        }
+
+        .recurso i {
+            font-size: 36px;
+            color: var(--secondary-blue);
+            margin-bottom: 15px;
+        }
+
+        .recurso h4 {
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .recurso p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* Novos estilos para funcionalidades adicionais */
+        .calendario-container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        .calendario-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .calendario-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+
+        .calendario-dia {
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .calendario-dia:hover {
+            background: var(--light-blue);
+        }
+
+        .calendario-dia.disponivel {
+            background: var(--success);
+            color: white;
+        }
+
+        .calendario-dia.agendado {
+            background: var(--warning);
+            color: white;
+        }
+
+        .calendario-dia.indisponivel {
+            background: var(--gray-border);
+            color: #64748b;
+            cursor: not-allowed;
+        }
+
+        .quiz-container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        .quiz-pergunta {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--primary-blue);
+        }
+
+        .quiz-opcoes {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .quiz-opcao {
+            padding: 15px;
+            border: 2px solid var(--gray-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quiz-opcao:hover {
+            border-color: var(--secondary-blue);
+            background: var(--light-blue);
+        }
+
+        .quiz-opcao.selecionada {
+            border-color: var(--secondary-blue);
+            background: var(--light-blue);
+        }
+
+        .quiz-resultado {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .quiz-resultado.correto {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .quiz-resultado.incorreto {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
         @media (max-width: 768px) {
             .servicos-container {
                 grid-template-columns: 1fr;
@@ -596,6 +1146,19 @@
             
             nav a {
                 justify-content: center;
+            }
+            
+            .search-container {
+                position: static;
+                transform: none;
+                margin-top: 15px;
+                justify-content: center;
+                width: 100%;
+            }
+            
+            .search-container input {
+                width: 100%;
+                max-width: 300px;
             }
             
             .botoes-grid {
@@ -619,6 +1182,30 @@
                 width: 100%;
                 max-width: 250px;
                 justify-content: center;
+            }
+            
+            .tabela-consulta {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .chatbot-window {
+                width: 300px;
+                height: 400px;
+            }
+            
+            .saude-categorias {
+                grid-template-columns: 1fr;
+            }
+            
+            .calendario-grid {
+                grid-template-columns: repeat(7, 1fr);
+                gap: 5px;
+            }
+            
+            .calendario-dia {
+                padding: 8px;
+                font-size: 12px;
             }
         }
 
@@ -663,9 +1250,15 @@
             <li><a href="?pagina=inicio"><i class="fas fa-home"></i> Início</a></li>
             <li><a href="?pagina=sobre"><i class="fas fa-info-circle"></i> O que é</a></li>
             <li><a href="?pagina=exames"><i class="fas fa-stethoscope"></i> Exames</a></li>
+            <li><a href="?pagina=saude"><i class="fas fa-heartbeat"></i> Saúde</a></li>
             <li><a href="?pagina=dicas"><i class="fas fa-lightbulb"></i> Dicas</a></li>
             <li><a href="?pagina=contato"><i class="fas fa-envelope"></i> Contato</a></li>
+            <li><a href="?pagina=consulta"><i class="fas fa-search"></i> Consultar</a></li>
         </ul>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Pesquisar no site...">
+            <button id="search-button"><i class="fas fa-search"></i></button>
+        </div>
     </nav>
 
     <main>
@@ -879,6 +1472,18 @@
                         <i class="fas fa-heartbeat"></i>
                         VER DICAS DE PREVENÇÃO
                     </a>
+                    <a href="?pagina=consulta" class="botao">
+                        <i class="fas fa-search"></i>
+                        CONSULTAR DADOS
+                    </a>
+                    <a href="?pagina=exames" class="botao">
+                        <i class="fas fa-stethoscope"></i>
+                        TIPOS DE EXAMES
+                    </a>
+                    <a href="?pagina=saude" class="botao">
+                        <i class="fas fa-heartbeat"></i>
+                        SAÚDE MASCULINA
+                    </a>
                 </div>
             </section>
 
@@ -906,6 +1511,41 @@
                 </div>
             </section>
 
+            <!-- NOVA SEÇÃO: CALENDÁRIO DE CONSULTAS -->
+            <div class="calendario-container fade-in">
+                <h2 style="color: var(--primary-blue); margin-bottom: 20px;">
+                    <i class="fas fa-calendar-alt"></i> Calendário de Consultas
+                </h2>
+                <div class="calendario-header">
+                    <h3 id="calendario-mes">Novembro 2024</h3>
+                    <div>
+                        <button class="btn-cadastro" onclick="mudarMes(-1)"><i class="fas fa-chevron-left"></i></button>
+                        <button class="btn-cadastro" onclick="mudarMes(1)"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                <div class="calendario-grid" id="calendario-grid">
+                    <!-- O calendário será gerado via JavaScript -->
+                </div>
+            </div>
+
+            <!-- NOVA SEÇÃO: QUIZ INTERATIVO -->
+            <div class="quiz-container fade-in">
+                <h2 style="color: var(--primary-blue); margin-bottom: 20px;">
+                    <i class="fas fa-brain"></i> Teste Seu Conhecimento
+                </h2>
+                <div id="quiz-pergunta-1">
+                    <div class="quiz-pergunta">1. A partir de qual idade os homens devem começar a fazer exames de próstata regularmente?</div>
+                    <div class="quiz-opcoes">
+                        <div class="quiz-opcao" data-resposta="a">A) 40 anos</div>
+                        <div class="quiz-opcao" data-resposta="b">B) 45 anos</div>
+                        <div class="quiz-opcao" data-resposta="c">C) 50 anos</div>
+                        <div class="quiz-opcao" data-resposta="d">D) 55 anos</div>
+                    </div>
+                    <button class="btn-cadastro primary" onclick="verificarResposta(1, 'c')" style="margin-top: 15px;">Verificar Resposta</button>
+                    <div class="quiz-resultado" id="quiz-resultado-1"></div>
+                </div>
+            </div>
+
         <?php elseif ($pagina == 'cadastro'): ?>
             <div class="cadastro-container fade-in">
                 <div class="cadastro-header">
@@ -924,6 +1564,12 @@
                     </button>
                     <button class="btn-cadastro" onclick="abrirFicha()">
                         <i class="fas fa-file-medical"></i> Ficha
+                    </button>
+                    <button class="btn-cadastro" onclick="imprimirCadastro()">
+                        <i class="fas fa-print"></i> Imprimir
+                    </button>
+                    <button class="btn-cadastro" onclick="consultarCadastro()">
+                        <i class="fas fa-search"></i> Consultar
                     </button>
                     <button class="btn-cadastro" onclick="fecharCadastro()">
                         <i class="fas fa-times"></i> Fechar
@@ -1163,6 +1809,9 @@
                 <a href="?pagina=dicas">
                     <i class="fas fa-heartbeat"></i> Ver Dicas de Prevenção
                 </a>
+                <a href="?pagina=consulta">
+                    <i class="fas fa-search"></i> Consultar Dados
+                </a>
                 <a href="?pagina=inicio">
                     <i class="fas fa-home"></i> Voltar ao Início
                 </a>
@@ -1182,6 +1831,113 @@
 
                 function abrirFicha() {
                     showNotification('Ficha do paciente aberta!', 'info');
+                }
+
+                function imprimirCadastro() {
+                    // Coletar dados do formulário
+                    const formData = new FormData(document.getElementById('form-cadastro'));
+                    const dados = {};
+                    for (let [key, value] of formData.entries()) {
+                        dados[key] = value;
+                    }
+                    
+                    // Gerar conteúdo para impressão
+                    const conteudoImpressao = `
+                        <div class="impressao-container">
+                            <div class="impressao-header">
+                                <h2>Ficha do Paciente - Novembro Azul</h2>
+                                <p>Ministério da Saúde</p>
+                                <p>Data de emissão: ${new Date().toLocaleDateString('pt-BR')}</p>
+                            </div>
+                            
+                            <div class="impressao-dados">
+                                <div class="impressao-grupo">
+                                    <h3>Dados Pessoais</h3>
+                                    <div class="impressao-item">
+                                        <span class="impressao-label">Nome:</span>
+                                        <span class="impressao-valor">${dados.nome || 'Não informado'}</span>
+                                    </div>
+                                    <div class="impressao-item">
+                                        <span class="impressao-label">CPF:</span>
+                                        <span class="impressao-valor">${dados.cpf || 'Não informado'}</span>
+                                    </div>
+                                    <div class="impressao-item">
+                                        <span class="impressao-label">Estado Civil:</span>
+                                        <span class="impressao-valor">${dados.estado_civil || 'Não informado'}</span>
+                                    </div>
+                                    <div class="impressao-item">
+                                        <span class="impressao-label">Nome da Mãe:</span>
+                                        <span class="impressao-valor">${dados.nome_mae || 'Não informado'}</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="impressao-grupo">
+                                    <h3>Dados da Consulta</h3>
+                                    <div class="impressao-item">
+                                        <span class="impressao-label">Data da Consulta:</span>
+                                        <span class="impressao-valor">${dados.data_consulta || 'Não agendada'}</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="impressao-grupo">
+                                    <h3>Informações Adicionais</h3>
+                                    <div class="impressao-item">
+                                        <span class="impressao-label">Renda Familiar:</span>
+                                        <span class="impressao-valor">R$ ${dados.renda_familiar || '0,00'}</span>
+                                    </div>
+                                    <div class="impressao-item">
+                                        <span class="impressao-label">Tempo de Residência:</span>
+                                        <span class="impressao-valor">${dados.tempo_residencia || '0'} anos</span>
+                                    </div>
+                                    <div class="impressao-item">
+                                        <span class="impressao-label">Casa Própria:</span>
+                                        <span class="impressao-valor">${dados.casa_propria ? 'Sim' : 'Não'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="impressao-grupo">
+                                <h3>Observações</h3>
+                                <p>Este documento foi gerado automaticamente pelo sistema Novembro Azul do Ministério da Saúde.</p>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Abrir janela de impressão
+                    const janelaImpressao = window.open('', '_blank');
+                    janelaImpressao.document.write(`
+                        <html>
+                            <head>
+                                <title>Impressão - Ficha do Paciente</title>
+                                <style>
+                                    body { font-family: Arial, sans-serif; margin: 20px; }
+                                    .impressao-container { max-width: 800px; margin: 0 auto; }
+                                    .impressao-header { text-align: center; margin-bottom: 25px; border-bottom: 2px solid #1e3a8a; padding-bottom: 15px; }
+                                    .impressao-header h2 { color: #1e3a8a; margin-bottom: 10px; }
+                                    .impressao-dados { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-bottom: 25px; }
+                                    .impressao-grupo { margin-bottom: 15px; }
+                                    .impressao-grupo h3 { color: #1e3a8a; margin-bottom: 8px; font-size: 16px; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px; }
+                                    .impressao-item { display: flex; margin-bottom: 5px; }
+                                    .impressao-label { font-weight: bold; min-width: 150px; }
+                                    .impressao-valor { flex: 1; }
+                                    @media print { body { margin: 0; } }
+                                </style>
+                            </head>
+                            <body>
+                                ${conteudoImpressao}
+                                <script>
+                                    window.onload = function() {
+                                        window.print();
+                                    };
+                                <\/script>
+                            </body>
+                        </html>
+                    `);
+                    janelaImpressao.document.close();
+                }
+
+                function consultarCadastro() {
+                    window.location.href = '?pagina=consulta';
                 }
 
                 function fecharCadastro() {
@@ -1235,6 +1991,30 @@
                         e.preventDefault();
                         showNotification('CPF deve conter 11 dígitos!', 'error');
                         return;
+                    }
+                });
+
+                // Atalhos de teclado
+                document.addEventListener('keydown', function(e) {
+                    // F2 - Consultar
+                    if (e.key === 'F2' || (e.ctrlKey && e.key === 'f')) {
+                        e.preventDefault();
+                        consultarCadastro();
+                    }
+                    // F4 - Gravar
+                    if (e.key === 'F4' || (e.ctrlKey && e.key === 's')) {
+                        e.preventDefault();
+                        document.querySelector('button[type="submit"]').click();
+                    }
+                    // F5 - Ficha
+                    if (e.key === 'F5') {
+                        e.preventDefault();
+                        abrirFicha();
+                    }
+                    // F6 - Imprimir
+                    if (e.key === 'F6' || (e.ctrlKey && e.key === 'p')) {
+                        e.preventDefault();
+                        imprimirCadastro();
                     }
                 });
             </script>
@@ -1316,6 +2096,723 @@
                     <a href="?pagina=agendamento">
                         <i class="fas fa-calendar-plus"></i> Agendar Consulta
                     </a>
+                    <a href="?pagina=consulta">
+                        <i class="fas fa-search"></i> Consultar Dados
+                    </a>
+                    <a href="?pagina=inicio">
+                        <i class="fas fa-home"></i> Voltar ao Início
+                    </a>
+                </div>
+            </div>
+
+        <?php elseif ($pagina == 'consulta'): ?>
+            <div class="consulta-container fade-in">
+                <div class="consulta-header">
+                    <i class="fas fa-search"></i> Consulta de Pacientes - Novembro Azul
+                </div>
+                
+                <div class="consulta-filtros">
+                    <div class="linha-campos">
+                        <div class="campo-grupo">
+                            <label class="campo-label">
+                                <i class="fas fa-search"></i> Pesquisar por Nome
+                            </label>
+                            <input type="text" id="filtro-nome" class="campo-input" placeholder="Digite o nome do paciente">
+                        </div>
+                        <div class="campo-grupo">
+                            <label class="campo-label">
+                                <i class="fas fa-address-card"></i> Pesquisar por CPF
+                            </label>
+                            <input type="text" id="filtro-cpf" class="campo-input" placeholder="Digite o CPF">
+                        </div>
+                        <div class="campo-grupo">
+                            <label class="campo-label">
+                                <i class="fas fa-filter"></i> Filtrar por Data
+                            </label>
+                            <input type="date" id="filtro-data" class="campo-input">
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; margin-top: 15px;">
+                        <button class="btn-cadastro primary" onclick="filtrarPacientes()">
+                            <i class="fas fa-filter"></i> Aplicar Filtros
+                        </button>
+                        <button class="btn-cadastro" onclick="limparFiltros()">
+                            <i class="fas fa-eraser"></i> Limpar Filtros
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="consulta-resultados">
+                    <h3 style="color: var(--primary-blue); margin-bottom: 15px;">Resultados da Consulta</h3>
+                    
+                    <table class="tabela-consulta">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Nome</th>
+                                <th>CPF</th>
+                                <th>Data Consulta</th>
+                                <th>Data Cadastro</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-resultados">
+                            <tr>
+                                <td colspan="6" style="text-align: center; padding: 20px;">
+                                    <i class="fas fa-info-circle" style="color: var(--secondary-blue); font-size: 24px; margin-bottom: 10px;"></i>
+                                    <p>Utilize os filtros acima para consultar os pacientes cadastrados</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="links-uteis" style="margin-top: 30px;">
+                <a href="?pagina=cadastro">
+                    <i class="fas fa-user-plus"></i> Novo Cadastro
+                </a>
+                <a href="?pagina=inicio">
+                    <i class="fas fa-home"></i> Voltar ao Início
+                </a>
+            </div>
+            
+            <script>
+                // Função para filtrar pacientes (simulação)
+                function filtrarPacientes() {
+                    const filtroNome = document.getElementById('filtro-nome').value.toLowerCase();
+                    const filtroCpf = document.getElementById('filtro-cpf').value;
+                    const filtroData = document.getElementById('filtro-data').value;
+                    
+                    // Em um sistema real, aqui seria feita uma requisição AJAX para o servidor
+                    // Para este exemplo, vamos simular alguns dados
+                    const pacientes = [
+                        {
+                            codigo: 'P20231115001',
+                            nome: 'João da Silva',
+                            cpf: '123.456.789-00',
+                            data_consulta: '2023-11-20',
+                            data_cadastro: '2023-11-15 10:30:00'
+                        },
+                        {
+                            codigo: 'P20231116001',
+                            nome: 'Pedro Santos',
+                            cpf: '987.654.321-00',
+                            data_consulta: '2023-11-25',
+                            data_cadastro: '2023-11-16 14:20:00'
+                        },
+                        {
+                            codigo: 'P20231117001',
+                            nome: 'Carlos Oliveira',
+                            cpf: '456.789.123-00',
+                            data_consulta: '2023-11-22',
+                            data_cadastro: '2023-11-17 09:15:00'
+                        }
+                    ];
+                    
+                    // Filtrar pacientes (simulação)
+                    const pacientesFiltrados = pacientes.filter(paciente => {
+                        const nomeMatch = !filtroNome || paciente.nome.toLowerCase().includes(filtroNome);
+                        const cpfMatch = !filtroCpf || paciente.cpf.includes(filtroCpf);
+                        const dataMatch = !filtroData || paciente.data_consulta === filtroData;
+                        
+                        return nomeMatch && cpfMatch && dataMatch;
+                    });
+                    
+                    // Atualizar tabela
+                    const tabelaBody = document.getElementById('tabela-resultados');
+                    
+                    if (pacientesFiltrados.length === 0) {
+                        tabelaBody.innerHTML = `
+                            <tr>
+                                <td colspan="6" style="text-align: center; padding: 20px;">
+                                    <i class="fas fa-exclamation-circle" style="color: var(--warning); font-size: 24px; margin-bottom: 10px;"></i>
+                                    <p>Nenhum paciente encontrado com os filtros aplicados</p>
+                                </td>
+                            </tr>
+                        `;
+                    } else {
+                        let html = '';
+                        pacientesFiltrados.forEach(paciente => {
+                            html += `
+                                <tr>
+                                    <td>${paciente.codigo}</td>
+                                    <td>${paciente.nome}</td>
+                                    <td>${paciente.cpf}</td>
+                                    <td>${formatarData(paciente.data_consulta)}</td>
+                                    <td>${formatarDataHora(paciente.data_cadastro)}</td>
+                                    <td>
+                                        <div class="acoes-tabela">
+                                            <button class="btn-acao editar" onclick="editarPaciente('${paciente.codigo}')">
+                                                <i class="fas fa-edit"></i> Editar
+                                            </button>
+                                            <button class="btn-acao imprimir" onclick="imprimirPaciente('${paciente.codigo}')">
+                                                <i class="fas fa-print"></i> Imprimir
+                                            </button>
+                                            <button class="btn-acao excluir" onclick="excluirPaciente('${paciente.codigo}')">
+                                                <i class="fas fa-trash"></i> Excluir
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            `;
+                        });
+                        tabelaBody.innerHTML = html;
+                    }
+                }
+                
+                function limparFiltros() {
+                    document.getElementById('filtro-nome').value = '';
+                    document.getElementById('filtro-cpf').value = '';
+                    document.getElementById('filtro-data').value = '';
+                    filtrarPacientes();
+                }
+                
+                function formatarData(data) {
+                    if (!data) return 'Não agendada';
+                    return new Date(data + 'T00:00:00').toLocaleDateString('pt-BR');
+                }
+                
+                function formatarDataHora(dataHora) {
+                    if (!dataHora) return '';
+                    return new Date(dataHora.replace(' ', 'T')).toLocaleString('pt-BR');
+                }
+                
+                function editarPaciente(codigo) {
+                    showNotification(`Editando paciente ${codigo}...`, 'info');
+                    // Em um sistema real, aqui redirecionaria para a página de edição
+                }
+                
+                function imprimirPaciente(codigo) {
+                    showNotification(`Imprimindo ficha do paciente ${codigo}...`, 'info');
+                    // Em um sistema real, aqui abriria a ficha de impressão do paciente
+                    window.open(`?pagina=impressao&codigo=${codigo}`, '_blank');
+                }
+                
+                function excluirPaciente(codigo) {
+                    if (confirm(`Tem certeza que deseja excluir o paciente ${codigo}?`)) {
+                        showNotification(`Paciente ${codigo} excluído com sucesso!`, 'success');
+                        // Em um sistema real, aqui faria uma requisição para excluir do banco
+                        filtrarPacientes(); // Recarregar a lista
+                    }
+                }
+                
+                // Formatação automática do CPF no filtro
+                document.getElementById('filtro-cpf').addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/\D/g, '');
+                    if (value.length <= 11) {
+                        value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                        value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                        value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+                        e.target.value = value;
+                    }
+                });
+            </script>
+
+        <?php elseif ($pagina == 'sobre'): ?>
+            <div class="fade-in">
+                <h2 style="text-align: center; color: var(--primary-blue); margin-bottom: 15px;">
+                    <i class="fas fa-info-circle"></i> Sobre a Campanha Novembro Azul
+                </h2>
+                
+                <div class="servicos-coluna" style="margin-bottom: 30px;">
+                    <h4><i class="fas fa-ribbon"></i> O que é o Novembro Azul?</h4>
+                    <p>O Novembro Azul é uma campanha de conscientização realizada no mês de novembro dirigida à sociedade e, em especial, aos homens, para conscientização a respeito de doenças masculinas, com ênfase na prevenção e no diagnóstico precoce do câncer de próstata.</p>
+                    
+                    <h4><i class="fas fa-history"></i> História</h4>
+                    <p>A campanha foi criada na Austrália, em 2003, aproveitando as comemorações do Dia Mundial de Combate ao Câncer de Próstata, realizado no dia 17 de novembro. No Brasil, o Novembro Azul foi criado pelo Instituto Lado a Lado pela Vida, com o objetivo de quebrar o preconceito masculino de ir ao médico e, quando necessário, realizar o exame de toque retal.</p>
+                    
+                    <h4><i class="fas fa-bullseye"></i> Objetivos</h4>
+                    <ul>
+                        <li>Conscientizar a população masculina sobre a importância do diagnóstico precoce do câncer de próstata</li>
+                        <li>Reduzir a mortalidade por meio do diagnóstico precoce e tratamento adequado</li>
+                        <li>Promover a quebra de preconceitos que impedem os homens de cuidarem da saúde</li>
+                        <li>Incentivar a adoção de hábitos saudáveis que previnem o câncer e outras doenças</li>
+                    </ul>
+                </div>
+                
+                <div class="links-uteis">
+                    <a href="?pagina=cadastro">
+                        <i class="fas fa-user-plus"></i> Cadastrar Dados
+                    </a>
+                    <a href="?pagina=dicas">
+                        <i class="fas fa-heartbeat"></i> Dicas de Prevenção
+                    </a>
+                    <a href="?pagina=inicio">
+                        <i class="fas fa-home"></i> Voltar ao Início
+                    </a>
+                </div>
+            </div>
+
+        <?php elseif ($pagina == 'exames'): ?>
+            <div class="fade-in">
+                <h2 style="text-align: center; color: var(--primary-blue); margin-bottom: 15px;">
+                    <i class="fas fa-stethoscope"></i> Exames para Diagnóstico do Câncer de Próstata
+                </h2>
+                
+                <div class="dicas-container">
+                    <div class="dica">
+                        <h3><i class="fas fa-hand-point-up"></i> Toque Retal</h3>
+                        <p>O exame de toque retal é rápido e permite ao médico avaliar alterações da glândula, como endurecimento e presença de nódulos suspeitos. É um exame fundamental para detecção precoce.</p>
+                        <p><strong>Duração:</strong> Aproximadamente 10 segundos</p>
+                        <p><strong>Preparação:</strong> Nenhuma preparação específica é necessária</p>
+                    </div>
+                    
+                    <div class="dica">
+                        <h3><i class="fas fa-tint"></i> Exame de PSA</h3>
+                        <p>O Antígeno Prostático Específico (PSA) é uma proteína produzida pela próstata. Níveis elevados podem indicar a presença de câncer, mas também podem ser aumentados em outras condições.</p>
+                        <p><strong>Como é feito:</strong> Por meio de coleta de sangue</p>
+                        <p><strong>Valores de referência:</strong> Geralmente abaixo de 4,0 ng/mL</p>
+                    </div>
+                    
+                    <div class="dica">
+                        <h3><i class="fas fa-microscope"></i> Biópsia da Próstata</h3>
+                        <p>Quando há suspeita de câncer, é realizada a biópsia, que consiste na retirada de fragmentos da próstata para análise em laboratório. É o único método que confirma o diagnóstico.</p>
+                        <p><strong>Como é feito:</strong> Guiado por ultrassom transretal</p>
+                        <p><strong>Preparação:</strong> Uso de antibióticos e laxantes</p>
+                    </div>
+                    
+                    <div class="dica">
+                        <h3><i class="fas fa-procedures"></i> Ultrassom Transretal</h3>
+                        <p>Exame de imagem que permite visualizar a próstata e verificar a presença de nódulos ou outras alterações. É frequentemente usado para guiar a biópsia.</p>
+                        <p><strong>Duração:</strong> Aproximadamente 15-20 minutos</p>
+                        <p><strong>Preparação:</strong> Jejum e uso de laxantes</p>
+                    </div>
+                    
+                    <div class="dica">
+                        <h3><i class="fas fa-magnet"></i> Ressonância Magnética</h3>
+                        <p>Exame de imagem mais detalhado que pode identificar lesões suspeitas na próstata. É especialmente útil para planejamento de biópsia em casos de PSA elevado com biópsia anterior negativa.</p>
+                        <p><strong>Duração:</strong> 30-45 minutos</p>
+                        <p><strong>Preparação:</strong> Jejum e uso de medicação para reduzir movimentos intestinais</p>
+                    </div>
+                    
+                    <div class="dica">
+                        <h3><i class="fas fa-bone"></i> Cintilografia Óssea</h3>
+                        <p>Exame realizado para verificar se o câncer se espalhou para os ossos (metástases). É indicado principalmente quando o câncer já está em estágio avançado.</p>
+                        <p><strong>Duração:</strong> 3-4 horas (incluindo preparação)</p>
+                        <p><strong>Preparação:</strong> Hidratação adequada antes e após o exame</p>
+                    </div>
+                </div>
+                
+                <div class="servicos-coluna" style="margin-top: 30px;">
+                    <h4><i class="fas fa-calendar-alt"></i> Quando fazer os exames?</h4>
+                    <p>Os exames de rotina para detecção precoce do câncer de próstata devem ser realizados anualmente por:</p>
+                    <ul>
+                        <li><strong>Homens a partir dos 50 anos</strong> sem fatores de risco</li>
+                        <li><strong>Homens a partir dos 45 anos</strong> com fatores de risco (histórico familiar, negros)</li>
+                        <li><strong>Homens a partir dos 40 anos</strong> com histórico familiar muito forte (dois ou mais parentes de primeiro grau)</li>
+                    </ul>
+                </div>
+                
+                <div class="links-uteis">
+                    <a href="?pagina=cadastro">
+                        <i class="fas fa-user-plus"></i> Cadastrar Dados
+                    </a>
+                    <a href="?pagina=agendamento">
+                        <i class="fas fa-calendar-plus"></i> Agendar Consulta
+                    </a>
+                    <a href="?pagina=dicas">
+                        <i class="fas fa-heartbeat"></i> Dicas de Prevenção
+                    </a>
+                    <a href="?pagina=inicio">
+                        <i class="fas fa-home"></i> Voltar ao Início
+                    </a>
+                </div>
+            </div>
+
+        <?php elseif ($pagina == 'agendamento'): ?>
+            <div class="cadastro-container fade-in">
+                <div class="cadastro-header">
+                    <i class="fas fa-calendar-check"></i> Agendamento de Consulta - Novembro Azul
+                </div>
+                
+                <div class="botoes-cadastro">
+                    <button class="btn-cadastro" onclick="novoAgendamento()">
+                        <i class="fas fa-file"></i> Novo
+                    </button>
+                    <button class="btn-cadastro primary" onclick="agendarConsulta()">
+                        <i class="fas fa-calendar-plus"></i> Agendar
+                    </button>
+                    <button class="btn-cadastro" onclick="consultarAgendamentos()">
+                        <i class="fas fa-search"></i> Consultar
+                    </button>
+                    <button class="btn-cadastro" onclick="imprimirAgendamento()">
+                        <i class="fas fa-print"></i> Imprimir
+                    </button>
+                    <button class="btn-cadastro" onclick="fecharAgendamento()">
+                        <i class="fas fa-times"></i> Fechar
+                    </button>
+                </div>
+
+                <div class="secao-cadastro">
+                    <div class="secao-titulo">
+                        <i class="fas fa-user"></i> Dados do Paciente
+                    </div>
+                    <div class="linha-campos">
+                        <div class="campo-grupo">
+                            <label class="campo-label required">
+                                <i class="fas fa-user"></i> Nome Completo
+                            </label>
+                            <input type="text" class="campo-input" placeholder="Digite seu nome completo" required>
+                        </div>
+                        <div class="campo-grupo">
+                            <label class="campo-label required">
+                                <i class="fas fa-address-card"></i> CPF
+                            </label>
+                            <input type="text" class="campo-input" maxlength="14" placeholder="000.000.000-00" required>
+                        </div>
+                        <div class="campo-grupo">
+                            <label class="campo-label required">
+                                <i class="fas fa-phone"></i> Telefone
+                            </label>
+                            <input type="text" class="campo-input" placeholder="(00) 00000-0000" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="secao-cadastro">
+                    <div class="secao-titulo">
+                        <i class="fas fa-calendar-day"></i> Dados do Agendamento
+                    </div>
+                    <div class="linha-campos">
+                        <div class="campo-grupo">
+                            <label class="campo-label required">
+                                <i class="fas fa-calendar"></i> Data Desejada
+                            </label>
+                            <input type="date" class="campo-input" required>
+                        </div>
+                        <div class="campo-grupo">
+                            <label class="campo-label required">
+                                <i class="fas fa-clock"></i> Horário Preferencial
+                            </label>
+                            <select class="campo-input" required>
+                                <option value="">Selecione</option>
+                                <option value="manha">Manhã (8h-12h)</option>
+                                <option value="tarde">Tarde (13h-17h)</option>
+                                <option value="noite">Noite (18h-21h)</option>
+                            </select>
+                        </div>
+                        <div class="campo-grupo">
+                            <label class="campo-label">
+                                <i class="fas fa-map-marker-alt"></i> Unidade de Atendimento
+                            </label>
+                            <select class="campo-input">
+                                <option value="">Selecione</option>
+                                <option value="centro">Centro de Saúde Central</option>
+                                <option value="zona-norte">UBS Zona Norte</option>
+                                <option value="zona-sul">UBS Zona Sul</option>
+                                <option value="zona-leste">UBS Zona Leste</option>
+                                <option value="zona-oeste">UBS Zona Oeste</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="secao-cadastro">
+                    <div class="secao-titulo">
+                        <i class="fas fa-stethoscope"></i> Motivo da Consulta
+                    </div>
+                    <div class="linha-campos">
+                        <div class="campo-grupo" style="grid-column: 1 / -1;">
+                            <label class="campo-label">
+                                <i class="fas fa-comment-medical"></i> Observações
+                            </label>
+                            <textarea class="campo-input" rows="4" placeholder="Descreva brevemente o motivo da consulta ou sintomas"></textarea>
+                        </div>
+                    </div>
+                    <div class="linha-campos">
+                        <div class="checkbox-grupo">
+                            <input type="checkbox" id="primeira-consulta">
+                            <label for="primeira-consulta">Primeira consulta</label>
+                        </div>
+                        <div class="checkbox-grupo">
+                            <input type="checkbox" id="retorno">
+                            <label for="retorno">Consulta de retorno</label>
+                        </div>
+                        <div class="checkbox-grupo">
+                            <input type="checkbox" id="exames">
+                            <label for="exames">Realização de exames</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rodape-cadastro">
+                    <i class="fas fa-keyboard"></i> NOVEMBRO AZUL | F2-Consultar F4-Agendar F6-Imprimir F8-Email F12-Agendamentos
+                </div>
+            </div>
+            
+            <div class="links-uteis">
+                <a href="?pagina=cadastro">
+                    <i class="fas fa-user-plus"></i> Cadastrar Dados
+                </a>
+                <a href="?pagina=consulta">
+                    <i class="fas fa-search"></i> Consultar Dados
+                </a>
+                <a href="?pagina=inicio">
+                    <i class="fas fa-home"></i> Voltar ao Início
+                </a>
+            </div>
+            
+            <script>
+                function novoAgendamento() {
+                    // Limpar formulário
+                    const inputs = document.querySelectorAll('.secao-cadastro input, .secao-cadastro select, .secao-cadastro textarea');
+                    inputs.forEach(input => {
+                        if (input.type === 'checkbox') {
+                            input.checked = false;
+                        } else {
+                            input.value = '';
+                        }
+                    });
+                    showNotification('Novo agendamento iniciado!', 'success');
+                }
+                
+                function agendarConsulta() {
+                    // Validar formulário
+                    const nome = document.querySelector('.secao-cadastro input[placeholder*="Nome Completo"]').value;
+                    const cpf = document.querySelector('.secao-cadastro input[placeholder*="CPF"]').value;
+                    const data = document.querySelector('.secao-cadastro input[type="date"]').value;
+                    
+                    if (!nome || !cpf || !data) {
+                        showNotification('Por favor, preencha todos os campos obrigatórios!', 'error');
+                        return;
+                    }
+                    
+                    // Simular agendamento
+                    showNotification('Consulta agendada com sucesso! Em breve entraremos em contato para confirmação.', 'success');
+                    
+                    // Redirecionar após 2 segundos
+                    setTimeout(() => {
+                        window.location.href = '?pagina=inicio';
+                    }, 2000);
+                }
+                
+                function consultarAgendamentos() {
+                    window.location.href = '?pagina=consulta';
+                }
+                
+                function imprimirAgendamento() {
+                    showNotification('Imprimindo comprovante de agendamento...', 'info');
+                    // Em um sistema real, aqui abriria a janela de impressão
+                }
+                
+                function fecharAgendamento() {
+                    window.location.href = '?pagina=inicio';
+                }
+                
+                // Formatação automática do CPF
+                document.querySelector('.secao-cadastro input[placeholder*="CPF"]').addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/\D/g, '');
+                    if (value.length <= 11) {
+                        value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                        value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                        value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+                        e.target.value = value;
+                    }
+                });
+                
+                // Formatação automática do telefone
+                document.querySelector('.secao-cadastro input[placeholder*="Telefone"]').addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/\D/g, '');
+                    if (value.length <= 11) {
+                        if (value.length <= 2) {
+                            value = value.replace(/(\d{0,2})/, '($1');
+                        } else if (value.length <= 7) {
+                            value = value.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+                        } else {
+                            value = value.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+                        }
+                        e.target.value = value;
+                    }
+                });
+            </script>
+
+        <?php elseif ($pagina == 'contato'): ?>
+            <div class="fade-in">
+                <h2 style="text-align: center; color: var(--primary-blue); margin-bottom: 15px;">
+                    <i class="fas fa-envelope"></i> Contato - Novembro Azul
+                </h2>
+                
+                <div class="servicos-container">
+                    <div class="servicos-coluna">
+                        <h4><i class="fas fa-phone"></i> Telefones</h4>
+                        <p><strong>Disque Saúde:</strong> 136</p>
+                        <p><strong>Central de Agendamento:</strong> (11) 3333-4444</p>
+                        <p><strong>Ouvidoria do SUS:</strong> 136</p>
+                        
+                        <h4><i class="fas fa-map-marker-alt"></i> Endereços</h4>
+                        <p><strong>Ministério da Saúde:</strong><br>
+                        Esplanada dos Ministérios, Bloco G<br>
+                        Brasília/DF - CEP: 70058-900</p>
+                        
+                        <h4><i class="fas fa-globe"></i> Sites Oficiais</h4>
+                        <p><strong>Portal da Saúde:</strong> www.saude.gov.br</p>
+                        <p><strong>INCA:</strong> www.inca.gov.br</p>
+                    </div>
+                    
+                    <div class="servicos-coluna">
+                        <h4><i class="fas fa-comments"></i> Fale Conosco</h4>
+                        <p>Entre em contato conosco para tirar dúvidas, fazer sugestões ou relatar problemas.</p>
+                        
+                        <div class="linha-campos">
+                            <div class="campo-grupo">
+                                <label class="campo-label">
+                                    <i class="fas fa-user"></i> Nome
+                                </label>
+                                <input type="text" class="campo-input" placeholder="Seu nome completo">
+                            </div>
+                            <div class="campo-grupo">
+                                <label class="campo-label">
+                                    <i class="fas fa-envelope"></i> E-mail
+                                </label>
+                                <input type="email" class="campo-input" placeholder="seu@email.com">
+                            </div>
+                        </div>
+                        
+                        <div class="campo-grupo" style="margin-top: 15px;">
+                            <label class="campo-label">
+                                <i class="fas fa-edit"></i> Mensagem
+                            </label>
+                            <textarea class="campo-input" rows="5" placeholder="Digite sua mensagem"></textarea>
+                        </div>
+                        
+                        <button class="btn-cadastro primary" style="margin-top: 15px; width: 100%;" onclick="enviarMensagem()">
+                            <i class="fas fa-paper-plane"></i> Enviar Mensagem
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="links-uteis">
+                    <a href="?pagina=inicio">
+                        <i class="fas fa-home"></i> Voltar ao Início
+                    </a>
+                </div>
+                
+                <script>
+                    function enviarMensagem() {
+                        showNotification('Mensagem enviada com sucesso! Em breve entraremos em contato.', 'success');
+                    }
+                </script>
+            </div>
+
+        <?php elseif ($pagina == 'saude'): ?>
+            <!-- NOVA PÁGINA: SAÚDE MASCULINA EXPANDIDA -->
+            <div class="fade-in">
+                <div class="saude-expandida">
+                    <h2><i class="fas fa-heartbeat"></i> Saúde Masculina Integral</h2>
+                    <p>Informações completas sobre saúde masculina, prevenção de doenças e promoção do bem-estar.</p>
+                    
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 75%"></div>
+                    </div>
+                    
+                    <div class="saude-categorias">
+                        <div class="saude-categoria">
+                            <h3><i class="fas fa-prostate"></i> Saúde da Próstata</h3>
+                            <ul>
+                                <li>Hiperplasia Prostática Benigna (HPB)</li>
+                                <li>Prostatite (inflamação da próstata)</li>
+                                <li>Câncer de próstata: prevenção e tratamento</li>
+                                <li>Exames de rotina e acompanhamento</li>
+                                <li>Tratamentos cirúrgicos e medicamentosos</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="saude-categoria">
+                            <h3><i class="fas fa-heart"></i> Saúde Cardiovascular</h3>
+                            <ul>
+                                <li>Fatores de risco para doenças cardíacas</li>
+                                <li>Pressão arterial e colesterol</li>
+                                <li>Exercícios para saúde do coração</li>
+                                <li>Alimentação cardioprotetora</li>
+                                <li>Sinais de alerta de infarto</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="saude-categoria">
+                            <h3><i class="fas fa-brain"></i> Saúde Mental</h3>
+                            <ul>
+                                <li>Depressão masculina: sinais e sintomas</li>
+                                <li>Ansiedade e estresse no trabalho</li>
+                                <li>Abuso de substâncias e dependência</li>
+                                <li>Terapia e apoio psicológico</li>
+                                <li>Estratégias de autocuidado emocional</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="saude-categoria">
+                            <h3><i class="fas fa-utensils"></i> Nutrição e Alimentação</h3>
+                            <ul>
+                                <li>Dieta equilibrada para homens</li>
+                                <li>Alimentos que previnem o câncer</li>
+                                <li>Suplementação vitamínica</li>
+                                <li>Hidratação e consumo de água</li>
+                                <li>Planejamento alimentar semanal</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="saude-categoria">
+                            <h3><i class="fas fa-running"></i> Atividade Física</h3>
+                            <ul>
+                                <li>Exercícios aeróbicos e cardiovasculares</li>
+                                <li>Treinamento de força e massa muscular</li>
+                                <li>Alongamento e flexibilidade</li>
+                                <li>Esportes e atividades recreativas</li>
+                                <li>Prevenção de lesões</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="saude-categoria">
+                            <h3><i class="fas fa-bed"></i> Sono e Descanso</h3>
+                            <ul>
+                                <li>Importância do sono para a saúde</li>
+                                <li>Distúrbios do sono (apneia, insônia)</li>
+                                <li>Higiene do sono: dicas práticas</li>
+                                <li>Ritmos circadianos e produtividade</li>
+                                <li>Técnicas de relaxamento</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <h3 style="color: var(--primary-blue); margin-top: 30px; margin-bottom: 20px;">Recursos Adicionais</h3>
+                    
+                    <div class="recursos-adicionais">
+                        <div class="recurso">
+                            <i class="fas fa-book-medical"></i>
+                            <h4>Guia de Saúde Completo</h4>
+                            <p>Baixe nosso guia completo com informações detalhadas sobre saúde masculina.</p>
+                        </div>
+                        
+                        <div class="recurso">
+                            <i class="fas fa-video"></i>
+                            <h4>Vídeos Educativos</h4>
+                            <p>Assista a vídeos com especialistas sobre prevenção e tratamentos.</p>
+                        </div>
+                        
+                        <div class="recurso">
+                            <i class="fas fa-calendar-check"></i>
+                            <h4>Lembretes de Saúde</h4>
+                            <p>Configure lembretes para exames e consultas de rotina.</p>
+                        </div>
+                        
+                        <div class="recurso">
+                            <i class="fas fa-users"></i>
+                            <h4>Grupos de Apoio</h4>
+                            <p>Participe de grupos de apoio para compartilhar experiências.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="links-uteis">
+                    <a href="?pagina=cadastro">
+                        <i class="fas fa-user-plus"></i> Cadastrar Dados
+                    </a>
+                    <a href="?pagina=agendamento">
+                        <i class="fas fa-calendar-plus"></i> Agendar Consulta
+                    </a>
+                    <a href="?pagina=dicas">
+                        <i class="fas fa-heartbeat"></i> Dicas de Prevenção
+                    </a>
                     <a href="?pagina=inicio">
                         <i class="fas fa-home"></i> Voltar ao Início
                     </a>
@@ -1325,6 +2822,34 @@
         <?php endif; ?>
     </main>
 
+    <!-- CHATBOT DE SUPORTE -->
+    <div class="chatbot-container">
+        <div class="chatbot-button" id="chatbot-toggle">
+            <i class="fas fa-comments"></i>
+        </div>
+        <div class="chatbot-window" id="chatbot-window">
+            <div class="chatbot-header">
+                <h3><i class="fas fa-robot"></i> Assistente Virtual</h3>
+                <button class="chatbot-close" id="chatbot-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="chatbot-messages" id="chatbot-messages">
+                <div class="message bot">
+                    Olá! Sou seu assistente virtual do Novembro Azul. Como posso ajudá-lo hoje?
+                </div>
+                <div class="quick-questions">
+                    <div class="quick-question" data-question="Quais são os sintomas do câncer de próstata?">Sintomas do câncer de próstata</div>
+                    <div class="quick-question" data-question="Como agendar uma consulta?">Agendar consulta</div>
+                    <div class="quick-question" data-question="Quais exames devo fazer?">Exames necessários</div>
+                    <div class="quick-question" data-question="Onde encontrar um urologista?">Encontrar especialista</div>
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbot-input" placeholder="Digite sua mensagem...">
+                <button id="chatbot-send"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <div class="footer-content">
             <p>&copy; 2024 Ministério da Saúde - Campanha Novembro Azul</p>
@@ -1332,5 +2857,235 @@
             <p class="slogan">Cuidar da saúde também é coisa de homem. Previna-se!</p>
         </div>
     </footer>
+
+    <script>
+        // Sistema de pesquisa
+        document.getElementById('search-button').addEventListener('click', function() {
+            const searchTerm = document.getElementById('search-input').value.trim();
+            if (searchTerm) {
+                // Redirecionar para página de resultados de pesquisa
+                window.location.href = `?pagina=pesquisa&termo=${encodeURIComponent(searchTerm)}`;
+            }
+        });
+
+        document.getElementById('search-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('search-button').click();
+            }
+        });
+
+        // Sistema do Chatbot
+        const chatbotToggle = document.getElementById('chatbot-toggle');
+        const chatbotWindow = document.getElementById('chatbot-window');
+        const chatbotClose = document.getElementById('chatbot-close');
+        const chatbotMessages = document.getElementById('chatbot-messages');
+        const chatbotInput = document.getElementById('chatbot-input');
+        const chatbotSend = document.getElementById('chatbot-send');
+        const quickQuestions = document.querySelectorAll('.quick-question');
+
+        chatbotToggle.addEventListener('click', function() {
+            chatbotWindow.style.display = 'flex';
+        });
+
+        chatbotClose.addEventListener('click', function() {
+            chatbotWindow.style.display = 'none';
+        });
+
+        chatbotSend.addEventListener('click', sendMessage);
+        chatbotInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        quickQuestions.forEach(question => {
+            question.addEventListener('click', function() {
+                const questionText = this.getAttribute('data-question');
+                addMessage(questionText, 'user');
+                processMessage(questionText);
+            });
+        });
+
+        function sendMessage() {
+            const message = chatbotInput.value.trim();
+            if (message) {
+                addMessage(message, 'user');
+                processMessage(message);
+                chatbotInput.value = '';
+            }
+        }
+
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            messageDiv.textContent = text;
+            chatbotMessages.appendChild(messageDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+
+        function processMessage(message) {
+            // Simulação de respostas do chatbot
+            setTimeout(() => {
+                let response = '';
+                
+                if (message.toLowerCase().includes('sintoma')) {
+                    response = 'Os sintomas do câncer de próstata podem incluir dificuldade para urinar, diminuição do jato de urina, necessidade de urinar mais vezes (principalmente à noite), sangue na urina ou no sêmen, e dor óssea em casos avançados. É importante consultar um urologista para avaliação adequada.';
+                } else if (message.toLowerCase().includes('agendar') || message.toLowerCase().includes('consulta')) {
+                    response = 'Para agendar uma consulta, você pode acessar a página "Agendar Consulta" no menu principal, ou entrar em contato com nossa central de atendimento pelo telefone (11) 3333-4444.';
+                } else if (message.toLowerCase().includes('exame')) {
+                    response = 'Os exames principais para detecção precoce do câncer de próstata são o toque retal e o exame de PSA (Antígeno Prostático Específico). Homens a partir dos 50 anos (ou 45 com fatores de risco) devem realizar esses exames anualmente.';
+                } else if (message.toLowerCase().includes('urologista') || message.toLowerCase().includes('especialista')) {
+                    response = 'Você pode encontrar um urologista através do sistema público de saúde (SUS) em qualquer Unidade Básica de Saúde, ou através de convênios médicos. Também temos parcerias com hospitais que oferecem atendimento especializado.';
+                } else if (message.toLowerCase().includes('prevenção')) {
+                    response = 'A prevenção do câncer de próstata inclui manter uma alimentação saudável (rica em frutas, verduras e legumes), praticar atividades físicas regularmente, manter o peso adequado, não fumar e realizar exames periódicos conforme a idade e fatores de risco.';
+                } else {
+                    response = 'Obrigado pela sua pergunta! Para informações mais específicas sobre câncer de próstata, exames, agendamento de consultas ou localização de especialistas, selecione uma das opções rápidas ou entre em contato conosco pelo telefone 136.';
+                }
+                
+                addMessage(response, 'bot');
+            }, 1000);
+        }
+
+        // Sistema de notificações
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `mensagem ${type} fade-in`;
+            notification.style.position = 'fixed';
+            notification.style.top = '20px';
+            notification.style.right = '20px';
+            notification.style.zIndex = '1000';
+            notification.style.maxWidth = '300px';
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'exclamation' : 'info'}-circle"></i>
+                ${message}
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 4000);
+        }
+
+        // Sistema do Calendário
+        let mesAtual = new Date().getMonth();
+        let anoAtual = new Date().getFullYear();
+
+        function gerarCalendario(mes, ano) {
+            const calendarioGrid = document.getElementById('calendario-grid');
+            const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+            
+            document.getElementById('calendario-mes').textContent = `${meses[mes]} ${ano}`;
+            
+            // Limpar calendário
+            calendarioGrid.innerHTML = '';
+            
+            // Adicionar cabeçalho dos dias
+            const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+            diasSemana.forEach(dia => {
+                const diaElement = document.createElement('div');
+                diaElement.className = 'calendario-dia';
+                diaElement.style.fontWeight = 'bold';
+                diaElement.textContent = dia;
+                calendarioGrid.appendChild(diaElement);
+            });
+            
+            // Primeiro dia do mês
+            const primeiroDia = new Date(ano, mes, 1).getDay();
+            
+            // Último dia do mês
+            const ultimoDia = new Date(ano, mes + 1, 0).getDate();
+            
+            // Dias do mês anterior
+            for (let i = 0; i < primeiroDia; i++) {
+                const diaElement = document.createElement('div');
+                diaElement.className = 'calendario-dia indisponivel';
+                diaElement.textContent = '';
+                calendarioGrid.appendChild(diaElement);
+            }
+            
+            // Dias do mês atual
+            for (let i = 1; i <= ultimoDia; i++) {
+                const diaElement = document.createElement('div');
+                diaElement.className = 'calendario-dia disponivel';
+                diaElement.textContent = i;
+                
+                // Marcar alguns dias como agendados (exemplo)
+                if (Math.random() > 0.7) {
+                    diaElement.className = 'calendario-dia agendado';
+                }
+                
+                diaElement.addEventListener('click', function() {
+                    if (this.classList.contains('disponivel')) {
+                        showNotification(`Consulta agendada para ${i}/${mes + 1}/${ano}`, 'success');
+                        this.className = 'calendario-dia agendado';
+                    }
+                });
+                
+                calendarioGrid.appendChild(diaElement);
+            }
+        }
+
+        function mudarMes(direcao) {
+            mesAtual += direcao;
+            if (mesAtual < 0) {
+                mesAtual = 11;
+                anoAtual--;
+            } else if (mesAtual > 11) {
+                mesAtual = 0;
+                anoAtual++;
+            }
+            gerarCalendario(mesAtual, anoAtual);
+        }
+
+        // Inicializar calendário
+        if (document.getElementById('calendario-grid')) {
+            gerarCalendario(mesAtual, anoAtual);
+        }
+
+        // Sistema do Quiz
+        function verificarResposta(numeroPergunta, respostaCorreta) {
+            const opcoes = document.querySelectorAll(`#quiz-pergunta-${numeroPergunta} .quiz-opcao`);
+            const resultado = document.getElementById(`quiz-resultado-${numeroPergunta}`);
+            
+            let respostaSelecionada = null;
+            
+            opcoes.forEach(opcao => {
+                if (opcao.classList.contains('selecionada')) {
+                    respostaSelecionada = opcao.getAttribute('data-resposta');
+                }
+                opcao.classList.remove('selecionada');
+            });
+            
+            if (!respostaSelecionada) {
+                showNotification('Por favor, selecione uma resposta!', 'error');
+                return;
+            }
+            
+            if (respostaSelecionada === respostaCorreta) {
+                resultado.className = 'quiz-resultado correto';
+                resultado.innerHTML = '<i class="fas fa-check"></i> Resposta correta! Parabéns!';
+                resultado.style.display = 'block';
+            } else {
+                resultado.className = 'quiz-resultado incorreto';
+                resultado.innerHTML = '<i class="fas fa-times"></i> Resposta incorreta. Tente novamente!';
+                resultado.style.display = 'block';
+            }
+        }
+
+        // Adicionar eventos de clique nas opções do quiz
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('quiz-opcao')) {
+                // Remover seleção de todas as opções
+                const opcoes = e.target.parentElement.querySelectorAll('.quiz-opcao');
+                opcoes.forEach(opcao => {
+                    opcao.classList.remove('selecionada');
+                });
+                
+                // Selecionar a opção clicada
+                e.target.classList.add('selecionada');
+            }
+        });
+    </script>
 </body>
 </html>
